@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JSON Parse | LAGRIDA</title>
+	<style>
+        .container{
+            max-width: 600px;
+            margin: 25px auto
+        }
+        textarea{
+            width: 98%;
+            height: 150px
+        }
+        #error_message{
+            margin: 10px 0px;
+            padding: 5px;
+            color: #CC0000;
+            font-weight: bold;
+            font-size: 18px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <textarea id="text">{
+"id": 1,
+"name": "Yassine",
+"list":[1,2,3,5]
+}</textarea>
+        <div id="error_message"></div>
+    </div>
+    <script src="json_parse.js"></script>
+    <script>
+        const textArea = document.querySelector("#text");
+        const errorMessage = document.querySelector("#error_message");
+
+        const applyChanges = () => {
+            errorMessage.innerHTML = '';
+            try{
+                const textObj = textArea.value;
+                const myObj = json_parse.parse(textObj);
+                console.log(myObj)
+            }catch(error){
+                errorMessage.innerHTML = error?.name + ' : ' + error?.message;
+            }
+        }
+
+        window.addEventListener("load", event => {
+            applyChanges();
+        });
+        textArea.addEventListener("input", event => {
+            applyChanges();
+        });
+	</script>
+</body>
+</html>
